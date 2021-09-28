@@ -1,0 +1,9 @@
+Display Measure = 
+Var _Selection = SELECTEDVALUE( Slicer[Selection])
+RETURN
+SWITCH(
+    _Selection,
+    "OT", [OT_m],
+    "DT", [DT_m],
+    "Total", [Total_m]
+    )
