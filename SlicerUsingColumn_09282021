@@ -10,5 +10,5 @@ SWITCH(
     )
 
 
-// This is a table created I created.
+// This is a table created I created to be used as a slicer.
 Slicer = {"OT", "DT","Total"}
