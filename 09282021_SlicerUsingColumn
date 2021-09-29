@@ -1,0 +1,23 @@
+// This is a masure located at Data table
+https://community.powerbi.com/t5/Desktop/How-to-create-stacked-bar-chart-using-values-from-measure-that-I/m-p/2103996
+
+
+Display Measure = 
+Var _Selection = SELECTEDVALUE( Slicer[Selection])
+RETURN
+SWITCH(
+    _Selection,
+    "OT", [OT_m],
+    "DT", [DT_m],
+    "Total", [Total_m]
+    )
+
+
+// This is a table used as a slicer.
+Slier = SELECTCOLUMNS( {("OT", "OT"),
+        ("DT", "DT"),
+        ("DT", "Total"),
+        ("OT", "Total")}, 
+         "Selection", [Value1],
+        "Grouping", [Value2]
+)
