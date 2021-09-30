@@ -1,0 +1,16 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-select-a-value-using-SUMX-or-row-context-to-create-a/m-p/2106665
+
+// Original approach:
+Measure =
+IF (
+      sumx('Table1', Table1'[D4]) > 40,
+     sumx('Table1',  Table1'[D4]) - 40,
+0
+)
+
+
+// Correct answer
+Measure =
+var _Value = Max(Table1'[D4])
+return
+If(_Value>40,_Value-40,0)
