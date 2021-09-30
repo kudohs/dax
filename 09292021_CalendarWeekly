@@ -1,0 +1,11 @@
+Simple Date =
+var DateStart = DATE(2021 , 7 , 1)
+var DateEnd = DATE(2021 , 12 , 31)
+var sinpledatatableonlysunday =
+  filter(
+        ADDCOLUMNS(CALENDAR(DateStart , DateEnd), "weeknum", WEEKNUM(''[Date] , 1),
+        //week begins on Sunday
+        weekday ( [Date] ) = 1
+)
+return
+  sinpledatatableonlysunday
