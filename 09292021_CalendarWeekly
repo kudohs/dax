@@ -1,3 +1,5 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Create-a-calendar-table-that-only-shows-only-one-day-out-of-a/m-p/2106756
+
 Simple Date =
 var DateStart = DATE(2021 , 7 , 1)
 var DateEnd = DATE(2021 , 12 , 31)
