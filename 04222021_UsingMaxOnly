@@ -10,7 +10,7 @@ Measure =
         && Star[Max] >= SUM(Test[Test])
     )
 )
-
+----------------------------------------
 Not the solution...
 MeasureNEW =
   CALCULATE(
@@ -21,8 +21,12 @@ MeasureNEW =
    )
 )
 
+---------------------------------------
 Solution:
 https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-insert-calculated-value-as-Filter-Calculate-Filter-value/m-p/1806577
+
+Forecast = SUM(Test[Test] + Parameter[Parameter Value]
+
 StarCalculatedParameter1 =
 VAR Forecast = [Forecast]
 RETURN
@@ -36,3 +40,14 @@ RETURN
     )
     
 [Forecast] is a measure, not a calculated column, so MAX([Forecast]) doesn't make sense to the calculation engine.
+
+Original:
+Measure =
+   CALCULATE(
+            VALUES(Star[Value]),
+   FILTER(
+       Star,
+       Star[Min] <= Sum(Test[Test])
+        && Star[Max] >= SUM(Test[Test])
+    )
+)
