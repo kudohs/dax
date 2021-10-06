@@ -1,0 +1,9 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Trying-to-write-Explicit-Measure-to-calculate-Percentage-A-Total/m-p/2117806#M48535
+
+
+Product A Count : = 
+CALCULATE( COUNTROWS( Data), Data[Product Type] = "Product A")
+
+
+% Product A = 
+DIVIDE( [Product A Count :], COUNTROWS(Data))
