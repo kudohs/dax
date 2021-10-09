@@ -1,0 +1,19 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Display-only-one-output-cell-in-a-table-from-separate-individual/m-p/1918614
+
+You need a way of seeing which location is in the current filter context
+(or in plain english, which row of the table you're currently calculating), then selecting the appropriate parameter value based on that.
+
+This measure uses SELECTEDVALUE to see which location we're calculating and a SWITCH statement to 
+select which parameter value to add.  You can keep adding lines into the switch statement for each location.
+
+
+Output =
+VAR _Base = MAX(MainTable[SUM C1-C3])
+VAR _Param =
+SWITCH(
+    SELECTEDVALUE(MainTable[Area]),
+      "CA", [Parameter Value],
+      "CPAC", [CPAC Value]
+)
+RETURN
+_Base + _Param
