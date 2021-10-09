@@ -1,0 +1,60 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Apply-related-value-of-Processing-Date-month/m-p/1943770
+
+MaxPotStarsWZeroPt = 
+IF( HASONEVALUE( 'Provider Info'[Provider Name]),
+    var CurrentTestValue = [SUM C1-C3]
+    return
+        CALCULATE(
+            // The value returned by SELECTEDVALUE will
+            // not be BLANK as long as TOPN returns
+            // only 1 row/value. This means MaxTotlaWHSS
+            // must be unique in the current context,
+            // which in turn means that in the current
+            // selected period there should NOT exist
+            // 2 equal values of MaxTotalWHSS. If you
+            // can guarantee this, you'll get the rating,
+            // otherwise you'll get BLANK.
+            SELECTEDVALUE( Survey[HealthInspectionRating]),
+            TOPN(1,
+                FILTER(
+                    ALL( Survey[MaxTotalWHSS] ),
+                    CurrentTestValue <= Survey[MaxTotalWHSS]
+                ),
+                Survey[MaxTotalWHSS],
+                ASC
+            ),
+            ALL( Survey )
+        )
+)
+
+
+MaxPtsHighestPotentialStars = 
+SWITCH( TRUE(),
+    [MaxPotStarsWZeroPt] = 1, "*",
+
+    HASONEVALUE( 'Provider Info'[Provider Name]),
+        var CurrentTestValue = [SUM C1-C3]
+        var Result =
+            // Tables with one column and one row
+            // only are automatically converted into
+            // a scalar value. If the function returns
+            // more than 1 row, you have to revise the
+            // logic and the data in your table.
+            TOPN (1,
+                FILTER (
+                    // You've got to use DISTINCT or VALUES
+                    // (read about the differences between these two
+                    // functions @ dax.guide) to keep the filter
+                    // on dates intact. By applying ALL you remove
+                    // all filters from an expanded(!!!) table or a
+                    // column depending on what argument you supply
+                    // to the function.
+                    DISTINCT( Survey[MaxTotalWHSS] ),
+                    CurrentTestValue <= Survey[MaxTotalWHSS]   
+                ),                                
+                Survey[MaxTotalWHSS],                                
+                ASC
+            )
+        return
+            Result
+)
