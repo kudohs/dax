@@ -1,0 +1,9 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Show-value-only-if-there-is-one-value/m-p/1974662#M43440
+
+Max = IF ( ISINSCOPE ( 'Table'[Full Name] ), MAX ( 'Table'[Age Band] ) )
+
+Selectedvalue =
+IF (
+    ISINSCOPE ( 'Table'[Full Name] ),
+    TOPN ( 1, VALUES ( 'Table'[Age Band] ) )
+)
