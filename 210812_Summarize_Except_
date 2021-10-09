@@ -1,0 +1,35 @@
+Refused Not Consented =
+VAR Refused =
+    DISTINCT (
+        SUMMARIZE (
+            FILTER ( 'Table', 'Table'[Consent] = "Refused" ),
+            'Table'[ClientID]
+        )
+    )
+VAR Consented =
+    DISTINCT (
+        SUMMARIZE (
+            FILTER ( 'Table', 'Table'[Consent] = "Consented" ),
+            'Table'[ClientID]
+        )
+    )
+RETURN
+    COUNTROWS ( EXCEPT ( Refused, Consented ) )
+    
+--------------------------------------------------------------------
+
+The first part:
+
+VAR Refused =
+DISTINCT (
+    SUMMARIZE (
+        FILTER ( 'Table', 'Table'[Consent] = "Refused" ),
+        'Table'[ClientID]
+    )
+)
+
+defines the variable 'Refused' as the single-column table comprising the distinct values from the 
+ClientID column for which the Consent column entry is "Refused".
+The next variable is similarly defined, though for Consent column entries of "Consented".
+The EXCEPT clause then returns a single-column table comprising all Client ID entries from the 'Refused' table which do not appear in the 'Consent' table.
+Finally, the number of rows in this last table are counted.
