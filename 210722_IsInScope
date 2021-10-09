@@ -7,3 +7,8 @@ IF (
     ISINSCOPE ( 'Table'[Full Name] ),
     TOPN ( 1, VALUES ( 'Table'[Age Band] ) )
 )
+
+
+I guess either case (Max or TOPN ( 1, VALUES)), both are logically same? When do we use Max and when do we use TOPN?
+
+---> I didn't use MAX since the age band is text, not numerical value, so I selected the first available text value.
