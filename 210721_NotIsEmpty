@@ -1,0 +1,3 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-fix-Age-Band-gap-calculated-column/m-p/1971451#M43328
+
+AgeBandMeasure = If (Not IsEmpty('Table'), Max('Table'[AgeBand]))
