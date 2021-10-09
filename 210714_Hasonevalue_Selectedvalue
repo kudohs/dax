@@ -1,0 +1,19 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-do-I-apply-TREATAS-or-create-a-virtual-relationship/m-p/1958236#M42777
+
+Col2 = 
+IF (
+    HASONEVALUE ( Main[ProviderName] ),
+    VAR Rating = [Rating]
+    RETURN
+        CALCULATE (
+            SELECTEDVALUE ( Index[IndexPoint] ),
+            Index[IndexRating] = Rating
+        )
+)
+
+Col2 =
+LOOKUPVALUE (
+    Index[IndexPoint],
+    Index[ProcessingDate], SELECTEDVALUE ( 'Date Bridge'[ProcessingDate] ),
+    Index[IndexRating], [Rating]
+)
