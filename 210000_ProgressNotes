@@ -1,4 +1,41 @@
 10/10/2021
+
+What is definition of SelectedValue?
+
+MaxPotStarsWZeroPt = 
+
+IF( HASONEVALUE( 'Provider Info'[Provider Name]),
+
+    var CurrentTestValue = [SUM C1-C3]
+
+    return
+
+        CALCULATE(
+            // The value returned by SELECTEDVALUE will
+            // not be BLANK as long as TOPN returns
+            // only 1 row/value. This means MaxTotlaWHSS
+            // must be unique in the current context,
+            // which in turn means that in the current
+            // selected period there should NOT exist
+            // 2 equal values of MaxTotalWHSS. If you
+            // can guarantee this, you'll get the rating,
+            // otherwise you'll get BLANK.
+            SELECTEDVALUE( Survey[HealthInspectionRating]),
+            TOPN(1,
+                FILTER(
+                    ALL( Survey[MaxTotalWHSS] ),
+                    CurrentTestValue <= Survey[MaxTotalWHSS]
+                ),
+                Survey[MaxTotalWHSS],
+                ASC
+            ),
+            ALL( Survey )
+        )
+)
+
+----------------------------------
+
+10/10/2021
 Row Context vs. Filter Context
 https://www.sqlbi.com/articles/row-context-and-filter-context-in-dax/
 https://www.youtube.com/watch?v=A0sBJxCoXx8
