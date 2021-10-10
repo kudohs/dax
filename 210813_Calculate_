@@ -1,0 +1,22 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Overwrite-the-DISTINCTCOUNT-as-0-if-some-other-condition-is-met/m-p/2015974#M44849
+
+Column =
+  VAR Step1 = CALCULATE (
+                             DISTINCTCOUNT( Table[ClientID] ),
+                                  (Table[Step] = 1 &&
+                                  Not(Table[Consent] = "Refused") &&
+                                 NOT(ISBLANK(Table[Consent]))
+                            )
+RETURN
+  IF(Table[Step] = 1 && NOT(Table[Consent] = "Not Eligible"),0,Step1)
+  
+  
+Your code was great, but I had to add "SelectedValue" or 
+it appears that I had to aggregate to get rid of error. 
+How do I fix to select only one value?  Because error was gone, but I don't think my logic goes thru though. Thanks.
+
+
+@JustinDoh1 That's just because you must have written a measure and the formula I wrote was for a column, 
+hence why I called it column. 
+SELECTEDVALUE will work although I tend to use MAX or MIN. 
+But, remember, this is going to depend heavily on context for the measure to work properly.
