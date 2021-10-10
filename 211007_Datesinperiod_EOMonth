@@ -1,0 +1,17 @@
+https://community.powerbi.com/t5/Desktop/Filter-by-pure-month-not-relative-date-using-measure/m-p/2122608
+
+Measure pattern is:
+
+
+Falls Count -1 Month =
+VAR _Today = MAX(DimDate[Date])
+VAR _NumberMonths = -1
+var _StartDate = EOMONTH(_Today, _NumberMonths)
+VAR _Result =
+CALCULATE(
+[Falls Count],
+DATESINPERIOD(DimDate[Date], _StartDate, -1, MONTH)
+)
+
+RETURN
+_Result
