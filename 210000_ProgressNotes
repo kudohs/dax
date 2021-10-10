@@ -2,6 +2,9 @@
 
 What is definition of SelectedValue?
 https://www.sqlbi.com/articles/using-the-selectedvalue-function-in-dax/
+The function SELECTEDVALUE returns the value of the column reference passed as first argument 
+if it is the only value available in the filter context, 
+otherwise it returns blank or the default value passed as second argument. Here are a few examples of possible syntax.
 
 --------------------------
 
