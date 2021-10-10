@@ -1,4 +1,10 @@
 10/10/2021
+IsInScope
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Show-value-only-if-there-is-one-value/m-p/1974662#M43440
+Reason for using IsInScope: You don't want to show any values if there is any grouping
+
+-------------------------------------
+10/10/2021
 Syntax analysis:
 
 MaxPtsHighestPotentialStars = 
