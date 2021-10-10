@@ -1,0 +1,20 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Trying-to-understand-usage-logic-of-SUMX-outcome-is-illogical/m-p/2030465
+
+Reasons to use SUMX: 
+SUMX accepts a table expression as the first parameter so you can filter it however you please and then 
+SUMX takes the second parameter, evaluates the expression for each row of the table and then sums the results together.
+You can see the difference between SUMX and CALCULATE. Take a simple table like below:
+ItemQuantityValue
+
+One	5	5
+Two	10	10
+Three	20	20
+
+And the following measures:
+Sumx1 = SUMX(FILTER('Items',[Item]<>"Two"),[Quantity]*[Value])
+Caculate1 = CALCULATE(SUM('Items'[Quantity])*SUM('Items'[Value]),'Items'[Item]<>"Two")
+
+SUMX returns the correct answer 425 while CALCULATE returns the wrong answer 625. 
+SUMX got the right answer because it evaluated at the row level, 5*5 + 20*20. 
+CALCULATE got it wrong because it calculated (20 + 5) * (20 + 5). 
+
