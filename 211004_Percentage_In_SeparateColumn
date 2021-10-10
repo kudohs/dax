@@ -1,0 +1,14 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Percentage-value-in-a-separate-column/m-p/2114959#M48447
+
+Measure =
+DIVIDE (
+    CALCULATE (
+        COUNT ( vw_staff_summary_covid19_rpt[Client_ID] ),
+        FILTER (
+            VALUES ( vw_staff_summary_covid19_rpt[Value] ),
+            vw_staff_summary_covid19_rpt[Value] = "Percentage Qualified A"
+                || vw_staff_summary_covid19_rpt[Value] = "Percentage Qualified B"
+        )
+    ),
+    CALCULATE ( COUNT ( vw_staff_summary_covid19_rpt[Value] ) )
+)
