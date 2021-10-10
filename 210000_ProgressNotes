@@ -1,4 +1,44 @@
 10/10/2021
+Syntax analysis:
+
+MaxPtsHighestPotentialStars = 
+SWITCH( TRUE(),
+    [MaxPotStarsWZeroPt] = 1, "*",
+
+    HASONEVALUE( 'Provider Info'[Provider Name]),
+        var CurrentTestValue = [SUM C1-C3]
+        var Result =
+            TOPN (1,
+                	FILTER (
+                    	DISTINCT( Survey[MaxTotalWHSS] ),
+                    	CurrentTestValue <= Survey[MaxTotalWHSS]   
+                ),                                
+                Survey[MaxTotalWHSS],                                
+                ASC
+            )
+        return
+            Result
+)
+---------------------------------------------------
+MaxPotStarsWZeroPt = 
+IF( HASONEVALUE( 'Provider Info'[Provider Name]),
+    	var CurrentTestValue = [SUM C1-C3]
+    	return
+        	CALCULATE(
+            	SELECTEDVALUE( Survey[HealthInspectionRating]),
+            	TOPN(1,
+                	FILTER(
+                    		ALL( Survey[MaxTotalWHSS] ),
+                    		CurrentTestValue <= Survey[MaxTotalWHSS]
+                	),
+                	Survey[MaxTotalWHSS],
+                	ASC
+            	),
+            	ALL( Survey )
+        	)
+   )
+-------------------------------------------
+10/10/2021
 
 What is definition of SelectedValue?
 https://www.sqlbi.com/articles/using-the-selectedvalue-function-in-dax/
