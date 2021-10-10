@@ -1,0 +1,25 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/My-calculation-does-not-work-using-variable-row-context-issue-or/m-p/2028544#M45427
+
+
+Var vNotEligibleStep1 = 
+    COUNTROWS(
+        FILTER(
+            Data,
+            Data[Consent] = "Not Eligible"  &&
+            Data[Step] = 1
+        )
+    )
+    
+---------------------------------
+Try:
+new measure = SUMX(Data, [Step 1_0819])
+@PaulDBrown Actually, SUMX made more output of rows, so I think it might not be the solution, but I need to review data more.
+
+--------------------------------------
+
+The problem appears to be the variable Step1.
+try:
+CALCULATE(
+DISTINCTCOUN(Data[ClientID]),
+FILTER(Data,
+Data[Step] = 1 && Data[Consent] <> "Refused" && NOT(ISBLANK(Data[Consent]))))
