@@ -1,4 +1,23 @@
 10/10/2021
+
+
+Column =
+  VAR Step1 = CALCULATE (
+                             DISTINCTCOUNT( Table[ClientID] ),
+                             (Table[Step] = 1 &&
+                             Not(Table[Consent] = "Refused") &&
+                             NOT(ISBLANK(Table[Consent]))
+                            )
+RETURN
+  IF(
+	Table[Step] = 1 && NOT(Table[Consent] = "Not Eligible"),
+	0,
+	Step1
+    )
+
+------------------------------------------
+
+10/10/2021
 Summarize
 Returns a summary table for the requested totals over a set of groups.
 https://docs.microsoft.com/en-us/dax/summarize-function-dax
