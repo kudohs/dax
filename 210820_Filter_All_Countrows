@@ -1,0 +1,9 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-do-I-express-this-in-DAX-explicitly-say-when-there-is-only/m-p/2029033
+
+Measure = 
+  VAR __ClientID = MAX('Data'[ClientID])
+  VAR __Table = FILTER(ALL('Data'),[ClientID]=__ClientID && [Step]=1)
+  VAR __Count = COUNTROWS(__Table)
+  VAR __Refused = COUNTROWS(FILTER(__Table,[Consent]="Refused"))
+RETURN
+  IF(__Count = 1 && __Refused = 1,0,1)
