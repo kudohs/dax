@@ -1,3 +1,5 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Exclude-distinct-count-with-OR/m-p/2013704
+
 Refused Not Consented =
 VAR Refused =
     DISTINCT (
