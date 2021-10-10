@@ -1,0 +1,14 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-do-I-express-this-in-DAX-where-we-have-to-filter-multiple/m-p/2028868#M45458
+
+
+CountClientSteps =
+VAR Summary =
+    ADDCOLUMNS (
+        SUMMARIZE ( Table1, Table1[ClientID], Table1[Step] ),
+        "RefusedDate",
+            CALCULATE ( MAX ( Table1[ConsentDate] ), Table1[Consent] = "Refused" ),
+        "ImmunizedDate",
+            CALCULATE ( MAX ( Table1[ImmunizationDate] ), Table1[Consent] = "Historical" )
+    )
+RETURN
+    COUNTROWS ( FILTER ( Summary, [ImmunizedDate] > [RefusedDate] ) )
