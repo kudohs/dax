@@ -1,0 +1,16 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Create-a-calendar-table-that-only-shows-only-one-day-out-of-a/m-p/2106756
+
+Simple Date =
+
+VAR DateStart = DATE ( 2021, 7, 1 )
+
+VAR DateEnd = DATE ( 2021, 12, 31 )
+
+VAR simpledatetablesonlysunday =
+    FILTER (
+      ADDCOLUMNS ( CALENDAR ( DateStart, DateEnd ), "weeknum", WEEKNUM ( [Date], 1 ) ),
+      WEEKDAY ( [Date] ) = 1
+    )
+RETURN
+
+simpledatetablesonlysunday
