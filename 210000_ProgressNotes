@@ -1,4 +1,10 @@
 10/10/2021
+Row Context vs. Filter Context
+https://www.sqlbi.com/articles/row-context-and-filter-context-in-dax/
+
+
+----------------------------------
+10/10/2021
 https://community.powerbi.com/t5/DAX-Commands-and-Tips/Total-does-not-show-up-correctly-while-using-SUMX-and-SUMMARIZE/m-p/2032329
 Measure Total issue:
 Suggested solution: HasOneFilter
