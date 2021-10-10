@@ -1,0 +1,10 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Percentage-calculation-in-a-row-context/m-p/2114866#M48438
+
+% Qualified =
+DIVIDE (
+    CALCULATE (
+        COUNT ( vw[Client_ID] ),
+        vw[Are_you_vaccinated] IN { "Percentage Qualified A", "Percentage Qualified B" }
+    ),
+    CALCULATE ( COUNT ( vw[Client_ID] ), REMOVEFILTERS ( vw[Are_you_vaccinated] ) )
+)
