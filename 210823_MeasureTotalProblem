@@ -1,0 +1,10 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Total-does-not-show-up-correctly-while-using-SUMX-and-SUMMARIZE/m-p/2032329
+
+
+@JustinDoh1 This looks like a measure totals problem. 
+Very common. See my post about it here: 
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Dealing-with-Measure-Totals/td-p/63376
+
+
+Also, this Quick Measure, Measure Totals, The Final Word should get you what you need:
+https://community.powerbi.com/t5/Quick-Measures-Gallery/Measure-Totals-The-Final-Word/m-p/547907
