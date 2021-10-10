@@ -1,0 +1,11 @@
+https://community.powerbi.com/t5/Desktop/How-to-create-a-slicer-based-on-column-value-now-I-need-to-link/m-p/2101484#M779827
+
+Display Measure = 
+VAR _Selection = SELECTEDVALUE ( Slicer[Selection] )
+RETURN 
+SWITCH ( 
+    _Selection,
+    "OT",[OT],
+    "DT",[DT],
+    "Total",[Total]
+)
