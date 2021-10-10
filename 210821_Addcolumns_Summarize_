@@ -1,0 +1,11 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-use-quot-Summarize-quot-function-with-only-same-ID-I/m-p/2029882#M45492
+
+@JustinDoh1 Try:
+
+VAR __Step = [Step]
+
+if a column or MAX([Step]) if measure.
+
+ 
+
+Then in your SUMMARIZE do SUMMARIZE(FILTER('Table1',[Step]=__Step).....
