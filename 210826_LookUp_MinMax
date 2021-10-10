@@ -1,0 +1,25 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-get-the-Value-based-on-MAX-date-using-variable/m-p/2041063#M45824
+
+https://community.powerbi.com/t5/Quick-Measures-Gallery/Lookup-Min-Max/m-p/985814#M434
+
+Lookup Min = 
+    VAR __Table = 
+        SUMMARIZE(
+            'Table',
+            [Item],
+            "__Value",SUM('Table'[Value])
+        )
+    VAR __Min = MINX(__Table,[__Value])
+RETURN
+    MINX(FILTER(__Table,[__Value] = __Min),[Item])
+
+Lookup Max = 
+    VAR __Table = 
+        SUMMARIZE(
+            'Table',
+            [Item],
+            "__Value",SUM('Table'[Value])
+        )
+    VAR __Max = MAXX(__Table,[__Value])
+RETURN
+    MAXX(FILTER(__Table,[__Value] = __Max),[Item])
