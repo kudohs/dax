@@ -1,0 +1,16 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Trying-to-understand-the-outcome-from-my-DAX-code-using-Min-amp/m-p/2024961#M45235
+
+Refused 0817 = 
+     Sumx (SUMMARIZE( Table1, Table1[Consent], Table1[ConsentDate],"_1",  
+                            CALCULATE( DISTINCTCOUNT( Table1[ClientID] ),
+                            ( 
+                                
+                                Table1[Consent] = "Refused"  &&
+                                Table1[step] = 1 // && 
+                                //vImmunization < vConsent
+                                )               
+                            ))
+                            , [_1]) 
+                            
+                           
+ First one is new column I am creating in temp table, Second I am using that column
