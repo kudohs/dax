@@ -1,0 +1,200 @@
+
+8/20
+CountClientSteps =
+VAR Summary =
+    ADDCOLUMNS (
+        SUMMARIZE ( Table1, Table1[ClientID], Table1[Step] ),
+        "RefusedDate",
+            CALCULATE ( MAX ( Table1[ConsentDate] ), Table1[Consent] = "Refused" ),
+        "ImmunizedDate",
+            CALCULATE ( MAX ( Table1[ImmunizationDate] ), Table1[Consent] = "Historical" )
+    )
+RETURN
+    COUNTROWS ( FILTER ( Summary, [ImmunizedDate] > [RefusedDate] ) )
+----------------------------------------------
+8/20
+Measure = 
+  VAR __ClientID = MAX('Data'[ClientID])
+  VAR __Table = FILTER(ALL('Data'),[ClientID]=__ClientID && [Step]=1)
+  VAR __Count = COUNTROWS(__Table)
+  VAR __Refused = COUNTROWS(FILTER(__Table,[Consent]="Refused"))
+RETURN
+  IF(__Count = 1 && __Refused = 1,0,1)
+----------------------------------------------
+8/19
+Var vNotEligibleStep1 = 
+    COUNTROWS(
+        FILTER(
+            Data,
+            Data[Consent] = "Not Eligible"  &&
+            Data[Step] = 1
+        )
+    )
+----------------------------------------------
+8/18
+Refused 0817 = 
+     Sumx (SUMMARIZE( Table1, Table1[Consent], Table1[ConsentDate],"_1",  
+           CALCULATE( DISTINCTCOUNT( Table1[ClientID] ),
+          ( 
+              Table1[Consent] = "Refused"  &&
+              Table1[step] = 1 // && 
+           //vImmunization < vConsent
+          )               
+      ))
+     , [_1]) 
+----------------------------------------------
+8/16
+CALCULATE(
+        MAX( myTable[ImmunizationDate] ),
+        ALLEXCEPT(
+            myTable,
+            myTable[Step]
+        )
+
+CALCULATE(
+        MAX( myTable[ConsentDate] ),
+        ALLEXCEPT(
+            myTable,
+            myTable[Step]
+        )
+-----------------------------------
+8/13
+Column =
+  VAR Step1 = CALCULATE (
+                             DISTINCTCOUNT( Table[ClientID] ),
+                             (Table[Step] = 1 &&
+                             Not(Table[Consent] = "Refused") &&
+                             NOT(ISBLANK(Table[Consent]))
+                            )
+RETURN
+  IF(
+	Table[Step] = 1 && NOT(Table[Consent] = "Not Eligible"),
+	0,
+	Step1
+    )
+-----------------------------------
+8/12
+ DISTINCT (
+        SUMMARIZE (
+            FILTER ( 'Table', 'Table'[Consent] = "Refused" ),
+            'Table'[ClientID]
+        )
+    )
+
+
+COUNTROWS ( EXCEPT ( Refused, Consented ) )
+
+---------------------------------------------
+7/22
+Max = IF ( ISINSCOPE ( 'Table'[Full Name] ), MAX ( 'Table'[Age Band] ) )
+
+Selectedvalue =
+IF (
+    ISINSCOPE ( 'Table'[Full Name] ),
+    TOPN ( 1, VALUES ( 'Table'[Age Band] ) )
+)
+----------------------------------
+7/21
+AgeBandMeasure = If (Not IsEmpty('Table'), Max('Table'[AgeBand]))
+--------------------------
+7/14
+Col2 = 
+IF (
+    HASONEVALUE ( Main[ProviderName] ),
+    VAR Rating = [Rating]
+    RETURN
+        CALCULATE (
+        SELECTEDVALUE ( Index[IndexPoint] ),
+        Index[IndexRating] = Rating
+        )
+)
+---------------------------------
+7/12
+Col4 = IF(
+        HASONEVALUE( Main[Name]),	
+      	var CurrentTestValue = 
+        (
+             IF 
+             (
+		SELECTEDVALUE(Main[CurStar]) = 5
+		,5
+                ,
+		SELECTEDVALUE(Main[CurStar]) + 1
+             )
+         )                                        
+       return
+       (
+        CALCULATE   
+        (
+         MAX ( Index[IndexPoint] ),
+         CurrentTestValue = Index[IndexRating] 
+         ) 
+       )  
+    )
+----------------------------------------------
+7/10
+IR =
+SWITCH (
+    MAX ( Main[MainRating] ),
+    1, "*",
+    CALCULATE (
+        MAX ( Index[IndexPoint] ),
+        TREATAS ( VALUES ( Main[MainRating] ), 'Index'[IndexRating] )
+    )
+)
+----------------------------------------------
+7/9
+CALCULATE(
+            
+          SELECTEDVALUE( Survey[HealthInspectionRating]),
+          TOPN(1,
+                FILTER(
+                    ALL( Survey[MaxTotalWHSS] ),
+                    CurrentTestValue <= Survey[MaxTotalWHSS]
+                ),
+                Survey[MaxTotalWHSS],
+                ASC
+            ),
+            ALL( Survey )
+        )
+----------------------------------------------
+6/25
+Output =
+VAR _Base = MAX(MainTable[SUM C1-C3])
+VAR _Param =
+SWITCH(
+    SELECTEDVALUE(MainTable[Area]),
+      "CA", [Parameter Value],
+      "CPAC", [CPAC Value]
+)
+RETURN
+_Base + _Param
+
+----------------------------------------------
+4/26
+StarCalculatedParameter1 =
+VAR Forecast = [Forecast]
+RETURN
+    CALCULATE (
+        VALUES ( Star[Value] ),
+        FILTER ( Star, 
+                Star[Min] <= Forecast && Star[Max] >= Forecast 
+                )
+    )
+----------------------------------------------
+4/22
+Forecast = SUM(Test[Test] + Parameter[Parameter Value]
+
+StarCalculatedParameter1 =
+VAR Forecast = [Forecast]
+
+RETURN
+    CALCULATE (
+            VALUES ( Star[Value] ),
+            FILTER ( 
+               Star, 
+               Star[Min] <= Forecast 
+               && Star[Max] >= Forecast 
+            )
+    )
+    
