@@ -65,7 +65,7 @@ IF( HASONEVALUE( 'Provider Info'[Provider Name]),
                 	Survey[MaxTotalWHSS],
                 	ASC
             	),
-            	ALL( Survey )
+            	ALL( Survey )  -- // What is purpose?
         	)
    )
 -------------------------------------------
