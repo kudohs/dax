@@ -1,3 +1,34 @@
+
+10/11/2021
+
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Filter-option-to-take-Max-range-only/m-p/1801381
+
+MaxPtToRmnHghstPtnlStrs = 
+
+SWITCH
+    (
+    TRUE(),    
+    [MaxPtsStrsWZrPtSrvy] = 1,
+    "*",
+    
+    HASONEVALUE ( vw_NH_ProviderInfo[ProviderName] ),
+    
+    VAR Rating = [MaxPtsStrsWZrPtSrvy]
+    
+    RETURN
+        (
+	    CALCULATE 
+	    (
+                SELECTEDVALUE (
+	    			vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS] 
+			       ),
+                              vw_MxTtWghtdHlthSrvyScr[HealthInspectionRating] = Rating
+             ) 
+	     - [SUM C1-C3] 
+	 ) * 2
+    ) 
+
+-----------------------------------------------------
 10/10/2021
 Column =
   VAR Step1 = CALCULATE (
