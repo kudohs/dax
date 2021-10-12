@@ -56,23 +56,6 @@ IF( HASONEVALUE( vw_NH_ProviderInfo[ProviderName]),
 )
 
 (2nd) Max Pts to Max Starts
-
-MaxPtToRmnHghstPtnlStrs = 
-	SWITCH
-    (
-    TRUE(),    
-    [MaxPtsStrsWZrPtSrvy] = 1,
-	"*",
-    		HASONEVALUE ( vw_NH_ProviderInfo[ProviderName] ),
-            VAR Rating = [MaxPtsStrsWZrPtSrvy]
-                RETURN
-        (CALCULATE (
-            SELECTEDVALUE ( vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS] ),
-            vw_MxTtWghtdHlthSrvyScr[HealthInspectionRating] = Rating
-        ) - [SUM C1-C3] ) * 2
-    ) 
-
-(3rd) / Max Pts Remain at Current:
 MaxPtToRmnHghstPtnlStrs = 
 
 SWITCH
@@ -97,6 +80,24 @@ SWITCH
 	     - [SUM C1-C3] 
 	 ) * 2
     ) 
+
+(3rd) Max Pts to Remain Current Stars
+
+MaxPtsToRmnCurStrs = 
+    SWITCH 
+    (
+	max(vw_NH_ProviderInfo[Health Inspection Rating]), 1, 
+	"*",
+        (
+        CALCULATE   
+                (
+                        MAX ( vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS] ),
+                        TREATAS ( VALUES ( vw_NH_ProviderInfo[Health Inspection Rating] ), 
+                        'vw_MxTtWghtdHlthSrvyScr'[HealthInspectionRating]  
+                        )
+                ) - [SUM C1-C3] 
+        ) * 2
+    )
 
 -----------------------------------------------------
 10/10/2021
