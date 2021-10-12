@@ -99,6 +99,27 @@ MaxPtsToRmnCurStrs =
         ) * 2
     )
 
+(4th) 
+MaxPtsToIncr1StrFrCrnt = 
+ IF(
+        	HASONEVALUE( vw_NH_ProviderInfo[ProviderName]),	
+      		var CurrentTestValue = 
+                (
+                    IF 
+                    (SELECTEDVALUE(vw_NH_ProviderInfo[Health Inspection Rating]) = 5
+		    ,5
+                    ,
+		    SELECTEDVALUE(vw_NH_ProviderInfo[Health Inspection Rating]) + 1
+                    ) 
+		            ) 
+    		        return(
+                            CALCULATE
+                        	(
+                             MAX ( vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS] ),
+                             CurrentTestValue = vw_MxTtWghtdHlthSrvyScr[HealthInspectionRating]     
+        			    ) - [SUM C1-C3]
+                    ) * 2)	
+
 -----------------------------------------------------
 10/10/2021
 Column =
