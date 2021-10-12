@@ -1,3 +1,7 @@
+- Find out why summarize was suggested to do Vaccine report instead of using Calculate
+- Find out how summarize was used in Vaccine report
+
+
 ** You should use ISINSCOPE not HASONEVALUE which will fix the issue since you don't want to show any values if there is any grouping.
 Max = IF ( ISINSCOPE ( 'Table'[Full Name] ), MAX ( 'Table'[Age Band] ) )
 
