@@ -55,6 +55,23 @@ IF( HASONEVALUE( vw_NH_ProviderInfo[ProviderName]),
         )
 )
 
+(2nd) Max Pts to Max Starts
+
+MaxPtToRmnHghstPtnlStrs = 
+	SWITCH
+    (
+    TRUE(),    
+    [MaxPtsStrsWZrPtSrvy] = 1,
+	"*",
+    		HASONEVALUE ( vw_NH_ProviderInfo[ProviderName] ),
+            VAR Rating = [MaxPtsStrsWZrPtSrvy]
+                RETURN
+        (CALCULATE (
+            SELECTEDVALUE ( vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS] ),
+            vw_MxTtWghtdHlthSrvyScr[HealthInspectionRating] = Rating
+        ) - [SUM C1-C3] ) * 2
+    ) 
+
 (3rd) / Max Pts Remain at Current:
 MaxPtToRmnHghstPtnlStrs = 
 
