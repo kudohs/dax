@@ -3,6 +3,59 @@
 
 https://community.powerbi.com/t5/DAX-Commands-and-Tips/Filter-option-to-take-Max-range-only/m-p/1801381
 
+(1st) MaxPtsStrsWZrPtSrvy
+
+MaxPtsStrsWZrPtSrvy = 
+IF( HASONEVALUE( vw_NH_ProviderInfo[ProviderName]),
+    // var CurrentTestValue = SELECTEDVALUE( vw_NH_ProviderInfo[SUM C1-C3]) -- Original
+    var CurrentTestValue = ( vw_NH_ProviderInfo[SUM C1-C3])
+    return
+        CALCULATE(
+            SELECTEDVALUE( vw_MxTtWghtdHlthSrvyScr[HealthInspectionRating]),
+	
+            TOPN(1,
+                FILTER(
+                    ALL( vw_MxTtWghtdHlthSrvyScr ),
+                    CurrentTestValue <= vw_MxTtWghtdHlthSrvyScr[StarCutOff]
+                ),
+                vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS],
+                ASC
+            )
+        )
+)
+
+MaxPtsStrsWZrPtSrvy = 
+IF( HASONEVALUE( vw_NH_ProviderInfo[ProviderName]),
+    // var CurrentTestValue = SELECTEDVALUE( vw_NH_ProviderInfo[SUM C1-C3]) -- Original
+    var CurrentTestValue = ( vw_NH_ProviderInfo[SUM C1-C3])
+    return
+        CALCULATE(
+            //SELECTEDVALUE( HealthSurveyScore[HealthInspectionRating]),
+            SELECTEDVALUE( vw_MxTtWghtdHlthSrvyScr[HealthInspectionRating]),
+	      // This TOPN should return
+            // just one row if everything
+            // is correctly and logically
+            // built and this, in turn, will
+            // make only one Value be visible
+            // in the context, hence SELECTEDVALUE
+            // will return only one value as it
+            // should be.	
+            TOPN(1,
+                FILTER(
+                    // ALL( HealthSurveyScore ),
+                    ALL( vw_MxTtWghtdHlthSrvyScr ),
+                    //CurrentTestValue <= HealthSurveyScore[MaxTotalWHSS]
+                    //CurrentTestValue <= vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS]
+                    CurrentTestValue <= vw_MxTtWghtdHlthSrvyScr[StarCutOff]
+                ),
+                // HealthSurveyScore[MaxTotalWHSS],
+                vw_MxTtWghtdHlthSrvyScr[MaxTotalWHSS],
+                ASC
+            )
+        )
+)
+
+(3rd) / Max Pts Remain at Current:
 MaxPtToRmnHghstPtnlStrs = 
 
 SWITCH
