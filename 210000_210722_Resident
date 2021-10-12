@@ -1,0 +1,22 @@
+** You should use ISINSCOPE not HASONEVALUE which will fix the issue since you don't want to show any values if there is any grouping.
+
+Max = IF ( ISINSCOPE ( 'Table'[Full Name] ), MAX ( 'Table'[Age Band] ) )
+
+Selectedvalue =
+IF (
+    ISINSCOPE ( 'Table'[Full Name] ),
+    TOPN ( 1, VALUES ( 'Table'[Age Band] ) )
+)
+
+
+I guess either case (Max or TOPN ( 1, VALUES)), both are logically same? When do we use Max and when do we use TOPN?
+
+---> I didn't use MAX since the age band is text, not numerical value, so I selected the first available text value.
+
+
+------------------------------------------
+
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-fix-Age-Band-gap-calculated-column/m-p/1971451#M43328
+AgeBandMeasure = If (Not IsEmpty('Table'), Max('Table'[AgeBand]))
+
+https://www.sqlbi.com/articles/all-the-secrets-of-summarize/
