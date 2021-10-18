@@ -3,5 +3,4 @@ https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-fix-Age-Band-gap-c
 AgeBandMeasure = If (Not IsEmpty('Table'), Max('Table'[AgeBand]))
 
 this is not about the formula of calculated column and measure.
-
 it's the problem of selectedvalue, in Feb 2020,there are two different agebands, 50-65 and 65-70. then selectedvalue will get the blank value.
