@@ -1,7 +1,17 @@
 (updated 10/20/2021)
 
-DAX:
+DAX Roadmap:
 1) Go over Simple query using summarizecolumn
+
+Evaluate
+  summarizecolumns (
+    'Date' [Calendar Year],
+    "Amount", [Sales Amount]
+    )
+2) Apply little bit more complicated one
+
+
+
 
 ---------------------------------------
 God's Viewpoint / Main pillars / Get Deeper in one of each:
