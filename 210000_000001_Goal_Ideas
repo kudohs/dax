@@ -1,4 +1,10 @@
-(updated 11/17/2021)
+(updated 11/19/2021)
+
+Business Idea:
+1) Focus on DAX, take a note, publish what you have learned
+2) Azure Function (Health Monitoring device)
+  Create IoT device to connect from IoTTrigger (person's temperature changes) -->
+  Trigger to next phase
 
 Steps:
 1) daily: DAX - become proficient - today: Dig into coding and Google Doc documentation (probably the easiest).
@@ -28,9 +34,7 @@ DAX Roadmap:
 6) Document all measures and details about each Pbix files (10/28/2021)
 7) Go over two pillars (context transition and evaluation contexts) (10/29/2021)
 
-------------------------------------
-Biz idea:
--- AI product create and sell (NLP or IoT in healthcare) 
+-------------------------------------------
 
 Scalability
 Value creation
