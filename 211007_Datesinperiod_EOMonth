@@ -1,7 +1,12 @@
 https://community.powerbi.com/t5/Desktop/Filter-by-pure-month-not-relative-date-using-measure/m-p/2122608
 
-Measure pattern is:
+Report: Clinical Metrics - Fall
 
+DAX function: Datesinperiod
+https://docs.microsoft.com/en-us/dax/datesinperiod-function-dax
+DATESINPERIOD(<dates>, <start_date>, <number_of_intervals>, <interval>)
+
+Measure pattern is:
 
 Falls Count -1 Month =
 VAR _Today = MAX(DimDate[Date])
