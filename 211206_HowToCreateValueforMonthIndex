@@ -1,0 +1,11 @@
+https://community.powerbi.com/t5/Desktop/How-to-create-value-for-Month-Index-to-display-incomplete-month/m-p/2223982
+
+Conditional formatting in Measure
+
+Report: Rev Metrics - Daily
+
+Incomplete = 
+    if( eomonth(max([CensusDate]),0) = eomonth(Today(), 0 ), 
+        "#EFEED8", 
+        "#E3DDD4"
+       )
