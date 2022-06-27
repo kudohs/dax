@@ -1,0 +1,18 @@
+https://community.powerbi.com/t5/Desktop/How-can-I-create-relationship-with-a-column-and-a-measure/m-p/2349459#M846865
+
+
+
+Calculated table:
+
+Calendar = 
+ADDCOLUMNS (
+    CALENDAR ( "2021/1/1", TODAY () + 365 ),
+    "Month Number", MONTH ( [Date] ),
+    "Year", YEAR ( [Date] ),
+    "Year-Month", LEFT ( FORMAT ( [Date], "yyyyMM" ), 6 ),
+    "Year-MonthName",
+        YEAR ( [Date] ) & " "
+            & FORMAT ( [Date], "MMM" )
+)
+
+Have a relationship between Calendar table and Fact table
