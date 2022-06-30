@@ -1,0 +1,10 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-reference-a-value-on-related-table/m-p/2366296#M60576
+
+
+DAYSINMONTH = 
+              day(
+                   calculate(
+                            ENDOFMONTH('Calendar'[Date]), 
+                            vw_revenue_metrics_ar_aging
+                            )
+                 )
