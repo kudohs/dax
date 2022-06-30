@@ -1,5 +1,7 @@
 https://community.powerbi.com/t5/Desktop/How-to-apply-filters-on-accumulated-amount-this-case-outstanding/m-p/2355243#M848462
 
+Report: Rev Metrics - AR Aging Analysis
+
 Suggestions:
 Cumm Sales = 
         CALCULATE(  
@@ -11,8 +13,11 @@ Cumm Sales =
                  )
 
 Actual applied:
-Latest Day Sum = 
-        calculate (
-                    sum (vw_revenue_metrics[DailyReimbursement]),
-                    vw_revenue_metrics[CensusDate] = max(vw_revenue_metrics[CensusDate])
+CumSales = 
+        CALCULATE(
+                    SUM(vw_revenue_metrics_ar_aging[Amount]),
+                    filter(
+                            all('Calendar'),'
+                            'Calendar'[Date] <=max('Calendar'[Date])
+                           )
                   )
