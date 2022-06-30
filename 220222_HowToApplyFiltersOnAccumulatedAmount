@@ -1,1 +1,18 @@
-https://community.powerbi.com/t5/Desktop/How-to-apply-filters-on-accumulated-amount-this-case-outstanding/m-p/2354369
+https://community.powerbi.com/t5/Desktop/How-to-apply-filters-on-accumulated-amount-this-case-outstanding/m-p/2355243#M848462
+
+Suggestions:
+Cumm Sales = 
+        CALCULATE(  
+                    SUM(Sales[Sales Amount]),
+                    filter(
+                            allselected('Date'),
+                            'Date'[date] <=max('Date'[date])
+                          )
+                 )
+
+Actual applied:
+Latest Day Sum = 
+        calculate (
+                    sum (vw_revenue_metrics[DailyReimbursement]),
+                    vw_revenue_metrics[CensusDate] = max(vw_revenue_metrics[CensusDate])
+                  )
