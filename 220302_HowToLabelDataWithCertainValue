@@ -10,3 +10,6 @@ CumSales =
                             'Calendar'[Date] <=max('Calendar'[Date])
                             )
                      )
+
+
+Calendar table needs to be fixed by having all dates that are in fact table. 
