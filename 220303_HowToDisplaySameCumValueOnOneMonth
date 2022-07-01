@@ -1,0 +1,14 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-display-the-same-cumulative-value-on-one-month/m-p/2373453#M61007
+
+Report - Rev. Metrics - A/R
+
+CumSales = 
+          CALCULATE(
+                    SUM(vw_revenue_metrics_ar_aging[Amount]),
+                    filter(
+                          all('Calendar'),
+                          'Calendar'[Date] <=max('Calendar'[Date])
+                          )
+                   )
+                   
+Using ALL is good when dates are involved.
