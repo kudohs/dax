@@ -1,3 +1,12 @@
 https://community.powerbi.com/t5/Desktop/How-to-Label-data-with-certain-value/m-p/2371472#M852984
 
 Report: AR Aging
+
+CumSales = 
+            CALCULATE(
+                      SUM(vw_revenue_metrics_ar_aging[Amount]),
+                      filter(
+                            all('Calendar'),
+                            'Calendar'[Date] <=max('Calendar'[Date])
+                            )
+                     )
