@@ -1,0 +1,10 @@
+https://community.powerbi.com/t5/Desktop/View-Report-As-of-Certain-Month/m-p/2389322#M857905
+
+Report: Revenue Metrics - AR Aging
+
+30-59 NEW = 
+CALCULATE(SUM(Data[Amount]), 
+    Data[EffectiveDate]>= selectedvalue(MonthsTable[Previous Month First Day]),
+    Data[EffectiveDate]< selectedvalue(MonthsTable[Current Month First Day]),
+    Data[TransactionDate]< selectedvalue(MonthsTable[Next Month First Day])
+)
