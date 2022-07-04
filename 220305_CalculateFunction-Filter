@@ -1,0 +1,16 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/Calculate-function-filter/m-p/2377268#M61311
+
+I am trying to understand this DAX code here.
+
+DAYSINMONTH =
+               day(calculate(
+                                       ENDOFMONTH('Calendar'[Date]),
+                                       Table1
+                                    )
+                       )
+ 
+Why do we have Table1 here?
+
+
+
+Indeed, this is how filters works in DAX. It's an explicit leveraging of Expanded Table in such statements, CALCULATE( XXX, Table ).
