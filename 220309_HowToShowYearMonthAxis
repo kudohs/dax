@@ -4,3 +4,5 @@ Created one to many relationship
 
 Used Total instead of using Amount
 Total = SUM(vw_monthly_revenue_transactions[Amount])
+
+Used Calendar table (and used Month name and Year)
