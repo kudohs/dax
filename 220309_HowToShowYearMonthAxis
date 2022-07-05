@@ -1,0 +1,6 @@
+https://community.powerbi.com/t5/Desktop/How-to-show-quot-Year-Month-quot-axis-is-it-branching-arrow/m-p/2384619#M856699
+
+Created one to many relationship
+
+Used Total instead of using Amount
+Total = SUM(vw_monthly_revenue_transactions[Amount])
