@@ -2,3 +2,14 @@ https://community.powerbi.com/t5/Desktop/Display-data-from-two-tables-in-a-Matri
 
 
 Change Values to firstnonblank as below.
+
+Test = 
+    IF(
+        FIRSTNONBLANK(Saga[ActualOrEstimated2],1) = "Actual",
+        [TotalGL],
+        if(
+           FIRSTNONBLANK(PDF[ActualOrEstimated2],1) = "Estimate",
+           [Total],
+           BLANK()
+          )
+      )
