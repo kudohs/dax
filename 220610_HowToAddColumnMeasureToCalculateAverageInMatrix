@@ -1,0 +1,9 @@
+https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-add-a-column-measure-to-calculate-Average-in-Matrix-or/m-p/2572460
+
+Report: Census Trend
+
+decimalFix =
+if(DISTINCTCOUNT(DimData1[DateFormat])=1,
+FORMAT([dailyClients],"0"),
+FORMAT([dailyClients],"0.oo")
+)
