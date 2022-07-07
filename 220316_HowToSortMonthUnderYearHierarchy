@@ -1,0 +1,11 @@
+https://community.powerbi.com/t5/Desktop/How-to-sort-Month-under-Year-hierarchy/m-p/2399323#M860831
+
+Create two columns in your tabl
+
+Month1 = FORMAT([Date],"mmm")
+Month1 sort = month([DAte])
+
+Month Rank = RANKX(ALL('Date'),'Date'[Month Year Sort],,DESC,Dense)
+ 
+
+Sort month1 on month Rank and use that in visual
