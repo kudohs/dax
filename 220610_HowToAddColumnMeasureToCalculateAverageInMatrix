@@ -2,8 +2,17 @@ https://community.powerbi.com/t5/DAX-Commands-and-Tips/How-to-add-a-column-measu
 
 Report: Census Trend
 
-decimalFix =
-if(DISTINCTCOUNT(DimData1[DateFormat])=1,
-FORMAT([dailyClients],"0"),
-FORMAT([dailyClients],"0.oo")
+decimalFix = 
+if(DISTINCTCOUNT(DimDate1[DateFormat])=1,
+format([Average],"0"),
+format([Average],"0.0")
 )
+
+
+Average = AVERAGEX(
+                    VALUES(DimDate1[DateFormat]), 
+                    CALCULATE(
+                        --DISTINCTCOUNT([ClientID])
+                        [ClientD_M1]
+                    )
+            )
